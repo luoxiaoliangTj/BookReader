@@ -32,9 +32,9 @@ class ReaderTTS(context: Context) {
     }
 
     suspend fun awaitReady(): Boolean = kotlinx.coroutines.suspendCancellableCoroutine { cont ->
-        if (ready) cont.resume(true)
+        if (ready) cont.resume(true, null)
         else synchronized(pendingInit) {
-            pendingInit.add { ok -> if (cont.isActive) cont.resume(ok) }
+            pendingInit.add { ok -> if (cont.isActive) cont.resume(ok, null) }
         }
     }
 
