@@ -50,8 +50,11 @@ jobs:
       - name: Grant execute permission
         run: chmod +x gradlew
 
-      - name: Clear Gradle cache to avoid stale compilation
-        run: rm -rf ~/.gradle/caches ~/.gradle/wrapper/dists/*
+      - name: Verify ReaderTTS.kt content
+        run: head -40 app/src/main/java/com/workbuddy/bookreader/reader/ReaderTTS.kt
+
+      - name: Clear all build artifacts
+        run: rm -rf .gradle build app/build
 
       - name: Restore CI gradle.properties
         run: |
