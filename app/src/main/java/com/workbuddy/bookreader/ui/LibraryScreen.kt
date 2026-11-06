@@ -29,7 +29,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.security.MessageDigest
 
-@Suppress("ExperimentalMaterial3Api")
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LibraryScreen(onOpenBook: (String, String) -> Unit) {
     val ctx = LocalContext.current

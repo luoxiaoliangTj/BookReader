@@ -4,6 +4,7 @@ import android.content.Context
 import android.net.Uri
 import android.speech.tts.TextToSpeech
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -184,7 +185,7 @@ fun ReaderScreen(bookId: String, format: String, onBack: () -> Unit) {
                 }) { Text(if (speaking) "⏸ 朗读" else "▶ 朗读") }
             }
             translation?.let { t ->
-                Surface(tonalElevation = 4.dp, Modifier.fillMaxWidth()) {
+                Surface(modifier = Modifier.fillMaxWidth(), tonalElevation = 4.dp) {
                     Column(Modifier.padding(12.dp)) {
                         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                             Text("翻译", fontWeight = FontWeight.Bold)

@@ -31,19 +31,17 @@ class ReaderTTS(context: Context) {
         }
     }
 
-    suspend fun awaitReady(): Boolean = kotlinx.coroutines.suspendCancellableCoroutine({ cont ->
+    suspend fun awaitReady(): Boolean = kotlinx.coroutines.suspendCancellableCoroutine { cont ->
         if (ready) cont.resume(true)
         else synchronized(pendingInit) {
             pendingInit.add { ok -> if (cont.isActive) cont.resume(ok) }
         }
-    }, onCancellation = { cont -> cont.cancel() })
+    }
 
     /** 依次朗读一段文本列表，通过 flow 回调当前段落索引（用于跟读高亮） */
     fun speak(paragraphs: List<String>, startIndex: Int = 0): Flow<Int> = callbackFlow {
         var idx = startIndex
         tts?.setOnUtteranceProgressListener(object : UtteranceProgressListener() {
-            override fun onCancel(utteranceId: String?) {}
-
             override fun onStart(utteranceId: String?) { trySend(idx) }
             override fun onDone(utteranceId: String?) {
                 idx++

@@ -72,8 +72,8 @@ fun ReaderPageView(
         .padding(20.dp)
     ) {
         Text(annotated,
-            fontSize = fontSize / androidx.compose.ui.platform.LocalDensity.current.density.sp,
-            lineHeight = (fontSize * 1.5f) / androidx.compose.ui.platform.LocalDensity.current.density.sp,
+            fontSize = fontSize.sp,
+            lineHeight = (fontSize * 1.5f).sp,
             onTextLayout = { layout = it; onLayoutResult(it) })
     }
 }
